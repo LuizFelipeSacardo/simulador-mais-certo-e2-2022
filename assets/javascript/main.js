@@ -14,6 +14,7 @@ const numberOfGoals = 6;
 
 let allGoalsList = allGoals();
 let allAcomplishmentsList = allAcomplishments();
+let allBoostsList = allBoosts();
 
 
 //Capturing all input values and turning it into a array
@@ -39,6 +40,20 @@ function allAcomplishments(){
 }
 
 
+function allBoosts(){
+  const exc = document.querySelector('#boosts__exc').value;
+  const exo = document.querySelector('#boosts__exo').value;
+  const index = document.querySelector('#boosts__index').value;
+
+  const values = [];
+  values.push(exc);
+  values.push(exo);
+  values.push(index);
+
+  return values;
+}
+
+
 
 // Profile management functions
 // Loading the profile
@@ -51,13 +66,15 @@ function loadProfileName(){
 function loadProfileData(){
   let allGoalsList = allGoals();
   let allAcomplishmentsList = allAcomplishments();
+  let allBoostsList = allBoosts();
   let profileName = loadProfileName();
   let data = [];
   
   data = JSON.parse(localStorage.getItem(profileName));
   if(data != null){
     allGoalsList.concat(data[0]);
-    allAcomplishmentsList.concat(data[1]);    
+    allAcomplishmentsList.concat(data[1]); 
+    allBoostsList.concat(data[2]);   
   }
   if(data === null){
     alert('Atenção, esta simulação está vazia, selecione uma simulação salva válida ou preencha os campos abaixo');
@@ -71,7 +88,9 @@ function populateFields(){
   let data = loadProfileData();
   let loadedGoals = data.goals;
   let loadedAcomplishments = data.acomplishments;
+  let loadedBoosts = data.boosts;
 
+  //populating the goals inputs
   let cont = 0;
   let goalsImput = document.querySelectorAll('.card-body__goal');
   goalsImput.forEach(element => {
@@ -79,27 +98,40 @@ function populateFields(){
     cont++;  
   }) 
 
+
+  //populating the acomplishments inputs
   let cont2 = 0;
   let acomplishmentsInput = document.querySelectorAll('.card-body__done');
   acomplishmentsInput.forEach(element => {
     element.value = loadedAcomplishments[cont2];
     cont2++;  
-  }) 
+  })
+  
+  //populating the boosts inputs
+  const exc = document.querySelector('#boosts__exc');
+  const exo = document.querySelector('#boosts__exo');
+  const index = document.querySelector('#boosts__index');
+
+  exc.value = loadedBoosts[0];
+  exo.value = loadedBoosts[1];
+  index.value = loadedBoosts[2];
+
+  alert('Simulação carregada com sucesso!, para ver os resultados, clique no botão "Salvar e Simular"')
 }
 
 
 // Saving the profille
 function joinLists(){
-  const goalPlusAcomplishment = {
-    acomplishments,
-    goals
+  const goalPlusAcomplishment = {   
   }
 
   let allGoalsList = allGoals();
   let allAcomplishmentsList = allAcomplishments();
+  let allBoostsList = allBoosts();
 
   goalPlusAcomplishment.acomplishments = allAcomplishmentsList;
   goalPlusAcomplishment.goals = allGoalsList;
+  goalPlusAcomplishment.boosts = allBoostsList;
 
   return goalPlusAcomplishment;
 }
@@ -111,6 +143,8 @@ function saveProfileData(){
   const data = joinLists();
   localStorage.setItem(profile, JSON.stringify(data))
 }
+
+
 
 // mannaging the "confirm saving" alert
 function saveAlert(){  
@@ -225,7 +259,7 @@ function calculateTotals(){
   }
 }
 
-
+/* not used in this version
 function calculateFinalLines(){
   const acomplishments = document.querySelectorAll('.card-body__done')
   const goals = document.querySelectorAll('.card-body__goal')
@@ -276,7 +310,7 @@ function calculateFinalLines(){
       acomplishments[i+38].value = allAcomplishmentsList[i+32]
     }             
   }
-}
+} */
 
 
 
@@ -391,7 +425,7 @@ function generateResults(){
 
     // filling the "totals" fields with the blocks lines sum.
     calculateTotals();
-    calculateFinalLines();
+    //calculateFinalLines(); - not used in this version
 
     // creating an updatted list of goals and acomplishments, now with the "totals" values too.
     const allGoalsListUpdated = allGoals();

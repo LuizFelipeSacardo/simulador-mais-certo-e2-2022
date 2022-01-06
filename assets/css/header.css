@@ -1,7 +1,7 @@
 .header{
   background-color: var(--background-color-02); 
   padding-bottom: 1px;
-  max-width: 840px;
+  max-width: var(--max-width);
   margin: auto;
   border-radius: 0 0 3px 3px;
 }
