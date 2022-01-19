@@ -409,15 +409,15 @@ function multiplyLines(elegibleLinesList, linesMultiplier, linesWithAccelerator)
 
 //apply the accelerator in the lines by acomplishing more than 100%.
 function linesAccelerator(allAcomplishmentsListUpdated, allGoalsListUpdated){
-  let linesWithAccelerator = [];
+  let linesWithAccelerator = [0,0,0,0,0,0];
 
   for(let i = 0; i < numberOfGoals; i++){
-    if(allAcomplishmentsListUpdated[36+i] >= allGoalsListUpdated[36+i]){
-      let accelerator = allAcomplishmentsListUpdated[36+i]/allGoalsListUpdated[36+i];
+    if(allAcomplishmentsListUpdated[i+36] >= allGoalsListUpdated[i+36]){
+      let accelerator = allAcomplishmentsListUpdated[i+36]/allGoalsListUpdated[i+36];
       if(accelerator >= 1.5){
-        linesWithAccelerator.push(1.5);
+        linesWithAccelerator[i] = (1.5);              
       } else{
-        linesWithAccelerator.push(accelerator);
+        linesWithAccelerator[i] = (accelerator);
       }
     }
   }
