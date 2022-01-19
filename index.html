@@ -30,7 +30,7 @@
       </nav>
     </div> -->
 
-    <h1 class="header__title">Simulador Mais Certo</h1>
+    <h1 class="header__title">Mais Certo - E2</h1>
     <nav class="header__nav">      
       <p class="header__info">Exibir/Ocultar blocos</p>       
       <ul class="nav__ul">
@@ -337,7 +337,41 @@
               
       </article>
 
-      <article class="card">        
+      <article class="card card__boosts">        
+        <h3 class="card-header__title">Aceleradores/Redutores</h3>        
+        <p class="boosts__main-title">Selecione os % de cada acelerador/redutor:</p>
+        <form action="" class="boosts__form">
+          <label for="boosts__title">Exc:
+            <select name="" class="boosts__options" id="boosts__exc">
+              <option value="0.20">+20%</option>
+              <option value="0.10">+10%</option>
+              <option value="0">0%</option>
+              <option value="-0.10">-10%</option>
+              <option value="-0.20">-20%</option>
+            </select>
+          </label>
+          <label for="boosts__title">Exo:
+            <select name="" class="boosts__options" id="boosts__exo">              
+              <option value="0">0%</option>
+              <option value="-0.10">-10%</option>
+              <option value="-0.20">-20%</option>
+            </select>
+          </label>
+          <label for="boosts__title">Quantidade de meses no indice A:
+            <select name="" class="boosts__options" id="boosts__index">
+              <option value="0">Nenhum "A"</option>
+              <option value="1">1 - "A"</option>
+              <option value="2">2 - "A"</option>
+              <option value="3">3 - "A"</option>
+              <option value="4">4 - "A"</option>
+              <option value="5">5 - "A"</option>
+              <option value="6">6 - "A"</option>
+            </select>
+          </label>
+        </form>              
+      </article>
+
+      <article class="card card-hide" id="card-totals">        
         <h3 class="card-header__title">Total</h3>        
         <h4 class="card-header__name">Nome da Linha</h4>
         <h4 class="card-header__goal">Meta</h4>
@@ -375,40 +409,6 @@
         <span class="card-body__done-percentage"></span>        
 
         <p class="card-footer">Linhas atingidas no total: <span class="card-footer__lines-done"></span></p>              
-      </article>
-
-      <article class="card card__boosts">        
-        <h3 class="card-header__title">Aceleradores/Redutores</h3>        
-        <p class="boosts__main-title">Selecione os % de cada acelerador/redutor:</p>
-        <form action="" class="boosts__form">
-          <label for="boosts__title">Exc:
-            <select name="" class="boosts__options" id="boosts__exc">
-              <option value="0.20">+20%</option>
-              <option value="0.10">+10%</option>
-              <option value="0">0%</option>
-              <option value="-0.10">-10%</option>
-              <option value="-0.20">-20%</option>
-            </select>
-          </label>
-          <label for="boosts__title">Exo:
-            <select name="" class="boosts__options" id="boosts__exo">              
-              <option value="0">0%</option>
-              <option value="-0.10">-10%</option>
-              <option value="-0.20">-20%</option>
-            </select>
-          </label>
-          <label for="boosts__title">Quantidade de meses no indice A:
-            <select name="" class="boosts__options" id="boosts__index">
-              <option value="0">Nenhum "A"</option>
-              <option value="1">1 - "A"</option>
-              <option value="2">2 - "A"</option>
-              <option value="3">3 - "A"</option>
-              <option value="4">4 - "A"</option>
-              <option value="5">5 - "A"</option>
-              <option value="6">6 - "A"</option>
-            </select>
-          </label>
-        </form>              
       </article>
 
       <button class="button" id="input__button">Salvar e Simular</button>

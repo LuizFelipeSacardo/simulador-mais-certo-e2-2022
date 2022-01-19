@@ -106,3 +106,4 @@ function hideBlock06(){
   plusButton06.classList.remove('nav__links-hide')
   card06.classList.add('card-hide')
 }
+

@@ -395,13 +395,33 @@ function calculateBoostsMultiplier(){
 
 
 // multiplying every line target by the global multiplier
-function multiplyLines(elegibleLinesList, linesMultiplier){
+function multiplyLines(elegibleLinesList, linesMultiplier, linesWithAccelerator){
   let multipliedLines = [];
 
-  elegibleLinesList.forEach(element =>{
-    multipliedLines.push(element * linesMultiplier);
-  })
+  for(let i = 0; i < numberOfGoals; i++){
+    multipliedLines.push(elegibleLinesList[i] * linesMultiplier * linesWithAccelerator[i]);
+  }
+  
   return multipliedLines;  
+}
+
+
+
+//apply the accelerator in the lines by acomplishing more than 100%.
+function linesAccelerator(allAcomplishmentsListUpdated, allGoalsListUpdated){
+  let linesWithAccelerator = [];
+
+  for(let i = 0; i < numberOfGoals; i++){
+    if(allAcomplishmentsListUpdated[36+i] >= allGoalsListUpdated[36+i]){
+      let accelerator = allAcomplishmentsListUpdated[36+i]/allGoalsListUpdated[36+i];
+      if(accelerator >= 1.5){
+        linesWithAccelerator.push(1.5);
+      } else{
+        linesWithAccelerator.push(accelerator);
+      }
+    }
+  }
+  return linesWithAccelerator;
 }
 
 
@@ -423,8 +443,13 @@ function generateResults(){
   let alertAnswer = saveAlert();
   if(alertAnswer){
 
+    // display the totals card
+    let cardTotals = document.querySelector('#card-totals');
+    cardTotals.classList.remove('card-hide');
+
     // filling the "totals" fields with the blocks lines sum.
     calculateTotals();
+    
     //calculateFinalLines(); - not used in this version
 
     // creating an updatted list of goals and acomplishments, now with the "totals" values too.
@@ -440,7 +465,8 @@ function generateResults(){
     const linesMultiplier = calculateLinesMultiplier(allGoalsListUpdated, allAcomplishmentsListUpdated);
     const boostsMultiplier = calculateBoostsMultiplier();
     const elegibleLinesList = elegibleLines(numberOfGoals, allGoalsListUpdated, allAcomplishmentsListUpdated);
-    const multipliedLines = multiplyLines(elegibleLinesList, linesMultiplier);
+    const linesWithAccelerator = linesAccelerator(allAcomplishmentsListUpdated, allGoalsListUpdated);
+    const multipliedLines = multiplyLines(elegibleLinesList, linesMultiplier, linesWithAccelerator);
     const finalValue = applyBoostsAndSum(multipliedLines, boostsMultiplier);
 
     // displaying the total amount earned

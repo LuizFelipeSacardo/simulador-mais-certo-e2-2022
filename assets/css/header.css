@@ -70,8 +70,7 @@
   margin: 0;
   color: var(--text-color-01);
   text-align: center;
-  padding-top: 5px;
-  padding-left: 30px;
+  padding-top: 5px;  
 }
 
 .header__nav{
